@@ -40,7 +40,7 @@ RSpec.describe Twit do
     it "extracts the correct amount of hashtags" do
       msg = "chicos y chicas no es chiques #feminism, #machirulo"
       twit = Twit.new(msg)
-      expect(twit.hashtags).to eql(2)
+      expect(twit.hashtags.size).to eql(2)
     end
   
     it "works for zero hashtags" do
@@ -52,7 +52,7 @@ RSpec.describe Twit do
     it "returns the correct hashtgas" do
       msg = "chicos y chicas no es chiques #feminism"
       twit = Twit.new(msg)
-      expect(twit.hashtags).to include("#feminism")
+      expect(twit.hashtags).to include("feminism")
     end
   end
 end
