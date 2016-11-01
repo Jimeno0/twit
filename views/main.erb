@@ -1,0 +1,14 @@
+<html>
+  <h1>Welcome <%= session[:user]%>!</h1>
+  
+  <form action='crear_twit' method='post'> 
+    <input type="text" name="message">
+    <input type="submit">
+  </form>
+
+  <ul>
+    <% session[:twits].each do |twit| %>
+      <li><%= twit %></li>
+    <% end %>
+  </ul>
+</html>

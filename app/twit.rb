@@ -16,7 +16,7 @@ class Twit
   end
   
   def hashtags
-    
+    binding.pry
     @hashtags = []
     @msg.scan(/#(\w+)/).each { |hastag| @hashtags.push(hastag[0]) }
     @hashtags
@@ -41,9 +41,9 @@ end
 
 
 
-# twit = Twit.new ("esto es un twit valido con dos hastags #cool #twwethtat")
-# # twit.hashtags
+twit = Twit.new ("esto es un twit valido con dos hastags #cool #twwethtat")
+twit.hashtags
 
-# binding.pry
 
-# puts ""
+
+puts ""

@@ -1,0 +1,13 @@
+<html>
+  <h1>Twit home page</h1>
+
+  <form action="/register_or_loggin" method="POST">
+    <% unless session[:logged] %>
+      <span style = "color:red"><%=@msg %></span>
+    <% end %>
+    <input type="text" name="user" required>
+    <input type="password" name="pass" required>
+    <button type="submit" name="action" value="register">register</button>
+    <button type="submit" name="action" value="loggin">loggin</button>
+  </form>
+</html>

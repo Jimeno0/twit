@@ -1,7 +1,8 @@
-# frozen_string_literal: true
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-# gem "rails"
-gem "rspec"
-gem "guard"
-gem 'guard-rspec', require: false
+gem 'rspec'
+gem 'guard'
+gem 'guard-rspec'
+gem 'sinatra'
+gem 'sinatra-contrib'
+gem 'haml'
