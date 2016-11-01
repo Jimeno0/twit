@@ -55,6 +55,29 @@ RSpec.describe Twit do
       expect(twit.hashtags).to include("feminism")
     end
   end
+
+  describe '.load_img' do
+      before(:each) do
+        msg = "chicos y chicas no es chiques #feminism"
+        @twit = Twit.new(msg)
+        
+      end
+    
+      it 'push the image to the image property' do
+        @twit.load_img("foton.jpeg")
+        expect(@twit.img).to eq("foton.jpeg")
+      end
+
+      it 'allows only .jpeg .png .jpg extensions' do
+        @twit.load_img("foton.pdf")
+        expect(@twit.img).to be_nil
+      end
+      
+      it 'returns alert msg on other extensions' do
+        
+        expect(@twit.load_img("foton.pdf")).to eq("Unsuported format")
+      end
+  end
 end
 
 
