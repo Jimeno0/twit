@@ -1,13 +1,13 @@
 <html>
   <h1>Welcome <%= session[:user]%>!</h1>
-  
+  <a href="/logout">logout</a>
   <form action='crear_twit' method='post'> 
     <input type="text" name="message">
-    <input type="submit">
+    <button type="submit">Publicar</button>
   </form>
 
   <ul>
-    <% session[:twits].each do |twit| %>
+    <% @twits.each do |twit| %>
       <li><%= twit %></li>
     <% end %>
   </ul>
