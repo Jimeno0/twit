@@ -1,13 +1,14 @@
-<html>
-  <h1>Twit home page</h1>
+<h1>Twit home page</h1>
 
-  <form action="/register_or_loggin" method="POST">
-    <% unless session[:logged] %>
-      <span style = "color:red">invalid user or passsword</span>
-    <% end %>
-    <input type="text" name="user" required>
-    <input type="password" name="pass" required>
-    <button type="submit" name="action" value="register">register</button>
-    <button type="submit" name="action" value="loggin">loggin</button>
-  </form>
-</html>
+
+<form action="/loggin" method="POST">
+  <input type="text" name="username" placeholder="username" required>
+  <input type="text" name="password" placeholder="password" required>
+  <button type="submit">loggin</button>
+</form>
+<hr>
+<form action="/register" method="POST">
+  <input type="text" name="username" placeholder="username">
+  <input type="text" name="password" placeholder="password">
+  <button type="submit">register</button>
+</form>
