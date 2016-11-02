@@ -1,14 +1,22 @@
-<html>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="col-md-3"></div>
+<div class="container col-md-6">
   <h1>Welcome <%= session[:username]%>!</h1>
   <a href="/logout">logout</a>
-  <form action='crear_twit' method='post'> 
-    <input type="text" name="message">
-    <button type="submit">Publicar</button>
+  <hr>
+  <form action='crear_twit' method='post' class="form-group">
+    <div class="form-group">
+      <label for="twitInput">twit</label>
+      <input type="text" name="message" class="form-control" id="twitInput" placeholder="Type your tweet here....">
+    </div>
+    <button type="submit" class="btn btn-default">Publicar</button>
   </form>
-
-  <ul>
+  <hr>
+  <ul class="list-group">
     <% @twits.each do |twit| %>
-      <li><%= twit %></li>
+      <li class="list-group-item"><%= twit %></li>
     <% end %>
   </ul>
-</html>
+</div>
+<div class="col-md-3"></div>

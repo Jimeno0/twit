@@ -2,6 +2,7 @@ require 'sinatra'
 require 'haml'
 require 'pry'
 require "sinatra/reloader" if development?
+require_relative "app/filemanager.rb"
 
 set :haml, format: :html5
 enable(:sessions)
@@ -12,58 +13,44 @@ get '/' do
 end
 
 post '/crear_twit' do
-  twits_file = File.open("private/#{session[:username]}.txt", "a")
-  twits_file.puts("#{params[:message]}\n")
-  twits_file.close
+  Filemanager.new_twit(session[:username],params[:message])
   redirect to ("/my_page")
 end
 
-post "/loggin" do
+before '/auth/*' do
   @user = params[:username]
   @pass = params[:password]
   @passwords = []
-
-  file = File.open("private/passwords.txt", "r")
-  file.each_line do |line|
-    @passwords.push(line.chomp.split(" "))
-  end
-  file.close  
-
-  @passwords.each do |user|
-    if user[0] == @user && user[1] == @pass
-      session[:logged] = true
-      session[:username] = @user
-      redirect to("/my_page")
-    end
-  end
-  session[:logged]= false
-  redirect to("/")
 end
 
-post "/register" do
-  @user = params[:username]
-  @pass = params[:password]
-  @passwords = []
-  file = File.open("private/passwords.txt", "a")
-  file.puts("#{@user} #{@pass}\n")
-  file.close
-
-  twits_file = File.open("private/#{@user}.txt", "a")
-  twits_file.close
+post "/auth/loggin" do
+  if Filemanager.authenticate(@user,@pass)
+    session[:logged] = true
+    session[:username] = @user
+    redirect to("/my_page")   
+  else
+    @error = "Invalid user or password"
+    erb(:index)
+  end
   
-  session[:logged] = true
-  session[:username] = @user
-  redirect to("/my_page")
+end
+
+post "/auth/register" do
+  
+  if Filemanager.get_passwords.find {|user| user[0] == @user}
+    @error = "User already exists"
+    erb(:index)
+  else
+    Filemanager.register(@user,@pass)
+    session[:logged] = true
+    session[:username] = @user
+    redirect to("/my_page")
+  end 
 end
 
 get "/my_page" do
   return redirect to("/") unless session[:logged]
-  @twits = []
-  twits_file = File.open("private/#{session[:username]}.txt", "r")
-  twits_file.each_line do |line|
-    @twits.push(line.chomp)
-  end
-  twits_file.close
+  @twits = Filemanager.get_twits(session[:username])
   erb(:main)
 end
 

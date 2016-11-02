@@ -1,14 +1,32 @@
-<h1>Twit home page</h1>
 
-
-<form action="/loggin" method="POST">
-  <input type="text" name="username" placeholder="username" required>
-  <input type="text" name="password" placeholder="password" required>
-  <button type="submit">loggin</button>
-</form>
-<hr>
-<form action="/register" method="POST">
-  <input type="text" name="username" placeholder="username">
-  <input type="text" name="password" placeholder="password">
-  <button type="submit">register</button>
-</form>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="col-md-3"></div>
+<div class="container col-md-6">
+  <h1>Twit home page</h1>
+  <hr>
+  <span style="color:red"><%=@error %></span>
+  <form action="/auth/loggin" method="POST">
+    <div class="form-group">
+      <label for="userLoginInput">Username</label>
+      <input type="text" class="form-control" name="username" placeholder="jimeno0" required id="userLoginInput">
+    </div>
+    <div class="form-group">
+      <label for="passwordLoginInput">Username</label>
+      <input type="text" class="form-control" name="password" placeholder="1234" required id="passwordLoginInput">
+    </div>
+    <button type="submit" class="btn btn-default">loggin</button>
+  </form>
+  <hr>
+  <form action="/auth/register" method="POST">
+    <div class="form-group">
+      <label for="userRegisterInput">Username</label>
+      <input type="text" class="form-control" name="username" placeholder="jimeno0" required id="userRegisterInput">
+    </div>
+    <div class="form-group">
+      <label for="passwordRegisterInput">Username</label>
+      <input type="text" class="form-control" name="password" placeholder="1234" required id="passwordRegisterInput">
+    </div>
+    <button type="submit" class="btn btn-default">register</button>
+  </form>
+</div>
+<div class="col-md-3"></div>
