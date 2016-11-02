@@ -7,13 +7,17 @@ set :haml, format: :html5
 enable(:sessions)
 
 get '/' do
-  @msg = "invalid user or passsword"
-  # session[:twits] ||= []
-  erb(:index)
+  #Si está logeado que empiece en su página
+  if session[:logged] == true
+
+    redirect to("/my_page")
+  else
+    erb(:index)
+  end
+  
 end
 
 post '/crear_twit' do
-  # session[:twits].push(params[:message])
   twits_file = File.open("private/#{session[:user]}.txt", "a")
   twits_file.puts("#{params[:message]}\n")
   twits_file.close
@@ -21,7 +25,6 @@ post '/crear_twit' do
 end
 
 post '/register_or_loggin' do
-
   @user = params[:user]
   @pass = params[:pass]
   @action = params[:action]

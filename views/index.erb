@@ -3,7 +3,7 @@
 
   <form action="/register_or_loggin" method="POST">
     <% unless session[:logged] %>
-      <span style = "color:red"><%=@msg %></span>
+      <span style = "color:red">invalid user or passsword</span>
     <% end %>
     <input type="text" name="user" required>
     <input type="password" name="pass" required>
